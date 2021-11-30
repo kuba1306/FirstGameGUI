@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartButton extends JButton implements ActionListener {
+public class StartButton extends JButton {
 
     public StartButton() {
         setBackground(Color.BLUE);
@@ -16,15 +16,5 @@ public class StartButton extends JButton implements ActionListener {
         setEnabled(true);
         setFont(new Font("Ala", Font.BOLD, 30));
         setBorderPainted(true);
-        addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-        if (source == this) {
-            System.out.println("POWODZENIA");
-        }
     }
 }
-
