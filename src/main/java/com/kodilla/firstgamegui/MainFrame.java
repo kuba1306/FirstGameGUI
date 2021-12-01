@@ -11,8 +11,9 @@ import java.util.Random;
 public class MainFrame extends JFrame implements ActionListener {
 
     ArrayList<Button> buttonList = new ArrayList<>();
-    LinkedList<Button> secondButtonList = new LinkedList<Button>();
+    LinkedList<Button> secondButtonList = new LinkedList<>();
     int randomNumber;
+    Random random = new Random();
 
     int a = 150; // Squares positions
     int b = 310;
@@ -57,16 +58,18 @@ public class MainFrame extends JFrame implements ActionListener {
         buttonList.add(bttn8);
         buttonList.add(bttn9);
 
-        secondButtonList.addAll(buttonList);
-        Random random = new Random();
-        randomNumber = random.nextInt(secondButtonList.size() - 1);
 
-        for (Button element : secondButtonList) {
+        for (Button element : buttonList) {
             add(element);
             element.addActionListener(this);
         }
+        secondButtonList.addAll(buttonList);
     }
+
     public void action() {
+        int bound = secondButtonList.size();
+        System.out.println(bound);
+        randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
         secondButtonList.get(randomNumber).setText("0");
         secondButtonList.get(randomNumber).setEnabled(false);
@@ -78,40 +81,46 @@ public class MainFrame extends JFrame implements ActionListener {
         Object source = e.getSource();
 
         if (source == startBttn) {
-            secondButtonList.addAll(buttonList);
             for (Button elem : secondButtonList) {
                 elem.setText("");
                 elem.setEnabled(true);
                 elem.tempValue = 0;
             }
-
         } else if (source == bttn1) {
+            secondButtonList.remove(bttn1);
             action();
 
         } else if (source == bttn2) {
+            secondButtonList.remove(bttn2);
             action();
 
         } else if (source == bttn3) {
+            secondButtonList.remove(bttn3);
             action();
 
         } else if (source == bttn4) {
+            secondButtonList.remove(bttn4);
             action();
 
         } else if (source == bttn5) {
+            secondButtonList.remove(bttn5);
             action();
 
         } else if (source == bttn6) {
+            secondButtonList.remove(bttn6);
             action();
 
         } else if (source == bttn7) {
+            secondButtonList.remove(bttn7);
             action();
 
         } else if (source == bttn8) {
+            secondButtonList.remove(bttn8);
             action();
 
         } else if (source == bttn9) {
+            secondButtonList.remove(bttn9);
             action();
-        } else {
         }
     }
 }
