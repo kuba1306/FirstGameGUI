@@ -66,14 +66,61 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.addAll(buttonList);
     }
 
+    public void AmIWin() {
+        if (bttn1.getTempValue() == 1 && bttn2.getTempValue() == 1 && bttn3.getTempValue() == 1) {
+            bttn1.setBackground(Color.RED);
+            bttn2.setBackground(Color.RED);
+            bttn3.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn4.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn6.getTempValue() == 1) {
+            bttn4.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn6.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn7.getTempValue() == 1 && bttn8.getTempValue() == 1 && bttn9.getTempValue() == 1) {
+            bttn7.setBackground(Color.RED);
+            bttn8.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn1.getTempValue() == 1 && bttn4.getTempValue() == 1 && bttn7.getTempValue() == 1) {
+            bttn1.setBackground(Color.RED);
+            bttn4.setBackground(Color.RED);
+            bttn7.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
+            bttn2.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn8.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn3.getTempValue() == 1 && bttn6.getTempValue() == 1 && bttn9.getTempValue() == 1) {
+            bttn3.setBackground(Color.RED);
+            bttn6.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn1.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn9.getTempValue() == 1) {
+            bttn1.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else if (bttn3.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn7.getTempValue() == 1) {
+            bttn3.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn7.setBackground(Color.RED);
+            System.out.println("You Win");
+        } else {
+        }
+    }
+
     public void action() {
         int bound = secondButtonList.size();
         System.out.println(bound);
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
         secondButtonList.get(randomNumber).setText("0");
+        secondButtonList.get(randomNumber).tempValue = 0;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
+        AmIWin();
     }
 
     @Override
@@ -81,7 +128,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Object source = e.getSource();
 
         if (source == startBttn) {
-            for (Button elem : secondButtonList) {
+            for (Button elem : buttonList) {
                 elem.setText("");
                 elem.setEnabled(true);
                 elem.tempValue = 0;
