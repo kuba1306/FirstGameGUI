@@ -58,7 +58,6 @@ public class MainFrame extends JFrame implements ActionListener {
         buttonList.add(bttn8);
         buttonList.add(bttn9);
 
-
         for (Button element : buttonList) {
             add(element);
             element.addActionListener(this);
@@ -71,49 +70,74 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn1.setBackground(Color.RED);
             bttn2.setBackground(Color.RED);
             bttn3.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn4.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn6.getTempValue() == 1) {
             bttn4.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn7.getTempValue() == 1 && bttn8.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn7.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn1.getTempValue() == 1 && bttn4.getTempValue() == 1 && bttn7.getTempValue() == 1) {
             bttn1.setBackground(Color.RED);
             bttn4.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
             bttn2.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn3.getTempValue() == 1 && bttn6.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn3.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn1.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn1.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else if (bttn3.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn7.getTempValue() == 1) {
             bttn3.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
+            for (Button elem : buttonList) {
+                elem.setEnabled(false);
+            }
             System.out.println("You Win");
         } else {
         }
     }
 
     public void action() {
+
+        AmIWin();
         int bound = secondButtonList.size();
-        System.out.println(bound);
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
         secondButtonList.get(randomNumber).setText("0");
@@ -132,40 +156,50 @@ public class MainFrame extends JFrame implements ActionListener {
                 elem.setText("");
                 elem.setEnabled(true);
                 elem.tempValue = 0;
+                elem.setBackground(Color.WHITE);
             }
         } else if (source == bttn1) {
+            bttn1.tempValue = 1;
             secondButtonList.remove(bttn1);
             action();
 
         } else if (source == bttn2) {
+            bttn2.tempValue = 1;
             secondButtonList.remove(bttn2);
             action();
 
         } else if (source == bttn3) {
+            bttn3.tempValue = 1;
             secondButtonList.remove(bttn3);
             action();
 
         } else if (source == bttn4) {
+            bttn4.tempValue = 1;
             secondButtonList.remove(bttn4);
             action();
 
         } else if (source == bttn5) {
+            bttn5.tempValue = 1;
             secondButtonList.remove(bttn5);
             action();
 
         } else if (source == bttn6) {
+            bttn6.tempValue = 1;
             secondButtonList.remove(bttn6);
             action();
 
         } else if (source == bttn7) {
+            bttn7.tempValue = 1;
             secondButtonList.remove(bttn7);
             action();
 
         } else if (source == bttn8) {
+            bttn8.tempValue = 1;
             secondButtonList.remove(bttn8);
             action();
 
         } else if (source == bttn9) {
+            bttn9.tempValue = 1;
             secondButtonList.remove(bttn9);
             action();
         }
