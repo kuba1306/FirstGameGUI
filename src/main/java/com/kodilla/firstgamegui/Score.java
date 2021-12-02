@@ -4,11 +4,13 @@ import java.awt.*;
 
 public class Score extends JTextField {
 
+    int r = 0;
+
     public Score() {
         setSize(200, 250);
         setBackground(Color.BLUE);
         setVisible(true);
-        setText("0");
+        setText(""+r);
         setFont(new Font("Ala", Font.BOLD, 30));
     }
 }

@@ -14,6 +14,7 @@ public class MainFrame extends JFrame implements ActionListener {
     LinkedList<Button> secondButtonList = new LinkedList<>();
     int randomNumber;
     Random random = new Random();
+    JLabel info = new JLabel();
 
     int a = 150; // Squares positions
     int b = 310;
@@ -47,6 +48,10 @@ public class MainFrame extends JFrame implements ActionListener {
         add(label3);
         add(startBttn);
         startBttn.addActionListener(this);
+        add(info);
+        info.setBounds(900,400,300,140);
+        info.setVisible(false);
+        info.setFont(new Font("tralala", Font.BOLD, 20));
 
         buttonList.add(bttn1);
         buttonList.add(bttn2);
@@ -62,7 +67,6 @@ public class MainFrame extends JFrame implements ActionListener {
             add(element);
             element.addActionListener(this);
         }
-        secondButtonList.addAll(buttonList);
     }
 
     public void AmIWin() {
@@ -70,6 +74,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn1.setBackground(Color.RED);
             bttn2.setBackground(Color.RED);
             bttn3.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -78,6 +84,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn4.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -86,6 +94,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn7.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -94,6 +104,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn1.setBackground(Color.RED);
             bttn4.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -102,6 +114,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn2.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -110,6 +124,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn3.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -126,6 +142,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn3.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -141,7 +159,7 @@ public class MainFrame extends JFrame implements ActionListener {
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
         secondButtonList.get(randomNumber).setText("0");
-        secondButtonList.get(randomNumber).tempValue = 0;
+        secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
         AmIWin();
@@ -152,6 +170,9 @@ public class MainFrame extends JFrame implements ActionListener {
         Object source = e.getSource();
 
         if (source == startBttn) {
+            secondButtonList.clear();
+            secondButtonList.addAll(buttonList);
+
             for (Button elem : buttonList) {
                 elem.setText("");
                 elem.setEnabled(true);

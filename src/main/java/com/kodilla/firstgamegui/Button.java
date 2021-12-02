@@ -33,7 +33,6 @@ public class Button extends JButton implements ActionListener {
         if (source == this) {
             setEnabled(false);
             setText("X");
-            tempValue = 1;
         }
     }
 }
