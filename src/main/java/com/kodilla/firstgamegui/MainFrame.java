@@ -12,13 +12,18 @@ public class MainFrame extends JFrame implements ActionListener {
 
     ArrayList<Button> buttonList = new ArrayList<>();
     LinkedList<Button> secondButtonList = new LinkedList<>();
+    Score label1 = new Score();
+    Score label2 = new Score();
     int randomNumber;
     Random random = new Random();
     JLabel info = new JLabel();
+    int yourScore;
+    int compScore;
 
     int a = 150; // Squares positions
     int b = 310;
     int c = 470;
+
 
     StartButton startBttn = new StartButton();
 
@@ -31,8 +36,6 @@ public class MainFrame extends JFrame implements ActionListener {
     Button bttn7 = new Button("3x1", a, c);
     Button bttn8 = new Button("3x2", b, c);
     Button bttn9 = new Button("3x3", c, c);
-
-//    Button[] buttons = {bttn1, bttn2, bttn3, bttn4, bttn5, bttn6, bttn7, bttn8, bttn9};
 
     public MainFrame() {
         setTitle("Tic Tac Toe by Jakub Panienski");
@@ -52,6 +55,16 @@ public class MainFrame extends JFrame implements ActionListener {
         info.setBounds(900,400,300,140);
         info.setVisible(false);
         info.setFont(new Font("tralala", Font.BOLD, 20));
+
+        yourScore = 0;
+        compScore = 0;
+
+        label1.setText("Your Score: "+yourScore);
+        label2.setText("Comp Score: "+compScore);
+        add(label1);
+        add(label2);
+        label1.setBounds(870, 200, 300, 100);
+        label2.setBounds(870, 250, 300, 100);
 
         buttonList.add(bttn1);
         buttonList.add(bttn2);
@@ -76,6 +89,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn3.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -86,6 +101,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn6.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -96,6 +113,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn9.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -106,6 +125,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn7.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -116,6 +137,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn8.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -126,6 +149,8 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn9.setBackground(Color.RED);
             info.setText("CONGRATULATIONS");
             info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -134,6 +159,10 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn1.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
+            info.setText("CONGRATULATIONS");
+            info.setVisible(true);
+            yourScore++;
+            label1.setText("Your Score: "+yourScore);
             for (Button elem : buttonList) {
                 elem.setEnabled(false);
             }
@@ -148,12 +177,10 @@ public class MainFrame extends JFrame implements ActionListener {
                 elem.setEnabled(false);
             }
             System.out.println("You Win");
-        } else {
         }
     }
 
     public void action() {
-
         AmIWin();
         int bound = secondButtonList.size();
         randomNumber = random.nextInt(bound);
@@ -162,7 +189,6 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
-        AmIWin();
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.kodilla.firstgamegui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Score extends JTextField {
+public class Score extends JLabel {
 
     int r = 0;
 
@@ -10,7 +10,6 @@ public class Score extends JTextField {
         setSize(200, 250);
         setBackground(Color.BLUE);
         setVisible(true);
-        setText(""+r);
         setFont(new Font("Ala", Font.BOLD, 30));
     }
 }
