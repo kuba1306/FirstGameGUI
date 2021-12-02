@@ -82,106 +82,121 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    public void whatToDoAfterCheckAmIWin() {
+        info.setText("CONGRATULATIONS");
+        info.setVisible(true);
+        yourScore++;
+        label1.setText("Your Score: "+yourScore);
+        for (Button elem : buttonList) {
+            elem.setEnabled(false);
+        }
+        System.out.println("You Win");
+    }
+
+    public void whatToDoAfterCheckAmILost() {
+        info.setText("UNFORTUNETLY...");
+        info.setVisible(true);
+        compScore++;
+        label2.setText("Comp Score: " + compScore);
+        for (Button elem : buttonList) {
+            elem.setEnabled(false);
+        }
+        System.out.println("You Lost");
+    }
+
     public void AmIWin() {
         if (bttn1.getTempValue() == 1 && bttn2.getTempValue() == 1 && bttn3.getTempValue() == 1) {
             bttn1.setBackground(Color.RED);
             bttn2.setBackground(Color.RED);
             bttn3.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
+
         } else if (bttn4.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn6.getTempValue() == 1) {
             bttn4.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn7.getTempValue() == 1 && bttn8.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn7.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn1.getTempValue() == 1 && bttn4.getTempValue() == 1 && bttn7.getTempValue() == 1) {
             bttn1.setBackground(Color.RED);
             bttn4.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
             bttn2.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn8.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn3.getTempValue() == 1 && bttn6.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn3.setBackground(Color.RED);
             bttn6.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn1.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn9.getTempValue() == 1) {
             bttn1.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn9.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            yourScore++;
-            label1.setText("Your Score: "+yourScore);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
         } else if (bttn3.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn7.getTempValue() == 1) {
             bttn3.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
             bttn7.setBackground(Color.RED);
-            info.setText("CONGRATULATIONS");
-            info.setVisible(true);
-            for (Button elem : buttonList) {
-                elem.setEnabled(false);
-            }
-            System.out.println("You Win");
+            whatToDoAfterCheckAmIWin();
+        }
+    }
+
+    public void AmILost() {
+        if (bttn1.getTempValue() == 2 && bttn2.getTempValue() == 2 && bttn3.getTempValue() == 2) {
+            bttn1.setBackground(Color.RED);
+            bttn2.setBackground(Color.RED);
+            bttn3.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+
+        } else if (bttn4.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn6.getTempValue() == 2) {
+            bttn4.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn6.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn7.getTempValue() == 2 && bttn8.getTempValue() == 2 && bttn9.getTempValue() == 2) {
+            bttn7.setBackground(Color.RED);
+            bttn8.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn1.getTempValue() == 2 && bttn4.getTempValue() == 2 && bttn7.getTempValue() == 2) {
+            bttn1.setBackground(Color.RED);
+            bttn4.setBackground(Color.RED);
+            bttn7.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
+            bttn2.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn8.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn3.getTempValue() == 2 && bttn6.getTempValue() == 2 && bttn9.getTempValue() == 2) {
+            bttn3.setBackground(Color.RED);
+            bttn6.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn1.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn9.getTempValue() == 2) {
+            bttn1.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn9.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+        } else if (bttn3.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn7.getTempValue() == 2) {
+            bttn3.setBackground(Color.RED);
+            bttn5.setBackground(Color.RED);
+            bttn7.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
         }
     }
 
     public void action() {
         AmIWin();
+        AmILost();
         int bound = secondButtonList.size();
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
