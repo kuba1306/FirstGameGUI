@@ -110,7 +110,6 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn2.setBackground(Color.RED);
             bttn3.setBackground(Color.RED);
             whatToDoAfterCheckAmIWin();
-
         } else if (bttn4.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn6.getTempValue() == 1) {
             bttn4.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
@@ -155,7 +154,6 @@ public class MainFrame extends JFrame implements ActionListener {
             bttn2.setBackground(Color.RED);
             bttn3.setBackground(Color.RED);
             whatToDoAfterCheckAmILost();
-
         } else if (bttn4.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn6.getTempValue() == 2) {
             bttn4.setBackground(Color.RED);
             bttn5.setBackground(Color.RED);
@@ -196,7 +194,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
     public void action() {
         AmIWin();
-        AmILost();
         int bound = secondButtonList.size();
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
@@ -204,6 +201,7 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
+        AmILost();
     }
 
     @Override
