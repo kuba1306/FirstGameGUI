@@ -10,62 +10,118 @@ import java.util.Random;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    ArrayList<Button> buttonList = new ArrayList<>();
-    LinkedList<Button> secondButtonList = new LinkedList<>();
-    Score label1 = new Score();
-    Score label2 = new Score();
-    int randomNumber;
-    Random random = new Random();
-    JLabel info = new JLabel();
-    int yourScore;
-    int compScore;
+    final private int a = 150, b = 310, c = 470; // Squares positions
+    private int yourScore, compScore, randomNumber;
+    private Random random;
+    private StartButton startBttn;
+    private Button bttn1, bttn2, bttn3, bttn4, bttn5, bttn6, bttn7, bttn8, bttn9;
+    private ArrayList<Button> buttonList;
+    private LinkedList<Button> secondButtonList;
+    private ArrayList<Button> line1, line2, line3, line4, line5, line6, line7, line8;
+    private ArrayList<ArrayList<Button>> allLines;
+    private Score label1, label2;
+    private JLabel label3, info;
+    private JRadioButton level1, level2;
+    private ButtonGroup choseLevel;
 
-    int a = 150; // Squares positions
-    int b = 310;
-    int c = 470;
+    public void createAllNeseseryObjects() {
+        secondButtonList = new LinkedList<>();
+        buttonList = new ArrayList<>();
+        label1 = new Score();
+        label2 = new Score();
+        label3 = new JLabel();
+        info = new JLabel();
+        random = new Random();
+        startBttn = new StartButton();
+        level1 = new JRadioButton("level 1", true);
+        level2 = new JRadioButton("level 2", false);
+        choseLevel = new ButtonGroup();
 
+        bttn1 = new Button("1x1", a, a);
+        bttn2 = new Button("1x2", b, a);
+        bttn3 = new Button("1x3", c, a);
+        bttn4 = new Button("2x1", a, b);
+        bttn5 = new Button("2x2", b, b);
+        bttn6 = new Button("2x3", c, b);
+        bttn7 = new Button("3x1", a, c);
+        bttn8 = new Button("3x2", b, c);
+        bttn9 = new Button("3x3", c, c);
 
-    StartButton startBttn = new StartButton();
+        line1 = new ArrayList<Button>();
+        line2 = new ArrayList<Button>();
+        line3 = new ArrayList<Button>();
+        line4 = new ArrayList<Button>();
+        line5 = new ArrayList<Button>();
+        line6 = new ArrayList<Button>();
+        line7 = new ArrayList<Button>();
+        line8 = new ArrayList<Button>();
+        allLines = new ArrayList<ArrayList<Button>>();
 
-    Button bttn1 = new Button("1x1", a, a);
-    Button bttn2 = new Button("1x2", b, a);
-    Button bttn3 = new Button("1x3", c, a);
-    Button bttn4 = new Button("2x1", a, b);
-    Button bttn5 = new Button("2x2", b, b);
-    Button bttn6 = new Button("2x3", c, b);
-    Button bttn7 = new Button("3x1", a, c);
-    Button bttn8 = new Button("3x2", b, c);
-    Button bttn9 = new Button("3x3", c, c);
+        line1.add(bttn1);
+        line1.add(bttn2);
+        line1.add(bttn3);
 
-    public MainFrame() {
-        setTitle("Tic Tac Toe by Jakub Panienski");
-        setSize(1300, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        setVisible(true);
-        setResizable(true);
-        JLabel label3 = new JLabel();
+        line2.add(bttn4);
+        line2.add(bttn5);
+        line2.add(bttn6);
+
+        line3.add(bttn7);
+        line3.add(bttn8);
+        line3.add(bttn9);
+
+        line4.add(bttn1);
+        line4.add(bttn4);
+        line4.add(bttn7);
+
+        line5.add(bttn2);
+        line5.add(bttn5);
+        line5.add(bttn8);
+
+        line6.add(bttn3);
+        line6.add(bttn6);
+        line6.add(bttn9);
+
+        line7.add(bttn1);
+        line7.add(bttn5);
+        line7.add(bttn9);
+
+        line8.add(bttn3);
+        line8.add(bttn5);
+        line8.add(bttn7);
+
+        allLines.add(line1);
+        allLines.add(line2);
+        allLines.add(line3);
+        allLines.add(line4);
+        allLines.add(line5);
+        allLines.add(line6);
+        allLines.add(line7);
+        allLines.add(line8);
+    }
+
+    public void customizeAllObjects() {
         label3.setText("POWODZENIA");
         label3.setFont(new Font("tralala", Font.BOLD, 40));
         label3.setBounds(250, 30, 300, 130);
-        add(label3);
-        add(startBttn);
-        startBttn.addActionListener(this);
-        add(info);
-        info.setBounds(900,400,300,140);
+        info.setBounds(900, 400, 300, 140);
         info.setVisible(false);
         info.setFont(new Font("tralala", Font.BOLD, 20));
-
+        level1.setBounds(870, 500, 100, 25);
+        level1.setVisible(true);
+        level2.setBounds(970, 500, 100, 25);
+        level2.setVisible(true);
+        choseLevel.add(level1);
+        choseLevel.add(level2);
         yourScore = 0;
         compScore = 0;
-
-        label1.setText("Your Score: "+yourScore);
-        label2.setText("Comp Score: "+compScore);
-        add(label1);
-        add(label2);
+        label1.setText("Your Score: " + yourScore);
         label1.setBounds(870, 200, 300, 100);
+        label2.setText("Comp Score: " + compScore);
         label2.setBounds(870, 250, 300, 100);
+        startBttn.addActionListener(this);
+    }
 
+    public void addAllneseseryObjects() {
         buttonList.add(bttn1);
         buttonList.add(bttn2);
         buttonList.add(bttn3);
@@ -80,13 +136,53 @@ public class MainFrame extends JFrame implements ActionListener {
             add(element);
             element.addActionListener(this);
         }
+        choseLevel.add(level1);
+        choseLevel.add(level2);
+        add(label1);
+        add(label2);
+        add(label3);
+        add(startBttn);
+        startBttn.addActionListener(this);
+        add(level1);
+        add(level2);
+        add(info);
+    }
+
+
+    public MainFrame() {
+        setTitle("Tic Tac Toe by Jakub Panienski");
+        setSize(1300, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        setVisible(true);
+        setResizable(true);
+        createAllNeseseryObjects();
+        customizeAllObjects();
+
+        secondButtonList = new LinkedList<>();
+        buttonList = new ArrayList<>();
+        label1 = new Score();
+        label2 = new Score();
+        info = new JLabel();
+        label3 = new JLabel();
+        random = new Random();
+        startBttn = new StartButton();
+        level1 = new JRadioButton("level 1", true);
+        level2 = new JRadioButton("level 2", false);
+        choseLevel = new ButtonGroup();
+        yourScore = 0;
+        compScore = 0;
+
+        createAllNeseseryObjects();
+        customizeAllObjects();
+        addAllneseseryObjects();
     }
 
     public void whatToDoAfterCheckAmIWin() {
         info.setText("CONGRATULATIONS");
         info.setVisible(true);
         yourScore++;
-        label1.setText("Your Score: "+yourScore);
+        label1.setText("Your Score: " + yourScore);
         for (Button elem : buttonList) {
             elem.setEnabled(false);
         }
@@ -104,104 +200,19 @@ public class MainFrame extends JFrame implements ActionListener {
         System.out.println("You Lost");
     }
 
-    public void AmIWin() {
-        if (bttn1.getTempValue() == 1 && bttn2.getTempValue() == 1 && bttn3.getTempValue() == 1) {
-            bttn1.setBackground(Color.RED);
-            bttn2.setBackground(Color.RED);
-            bttn3.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn4.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn6.getTempValue() == 1) {
-            bttn4.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn6.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn7.getTempValue() == 1 && bttn8.getTempValue() == 1 && bttn9.getTempValue() == 1) {
-            bttn7.setBackground(Color.RED);
-            bttn8.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn1.getTempValue() == 1 && bttn4.getTempValue() == 1 && bttn7.getTempValue() == 1) {
-            bttn1.setBackground(Color.RED);
-            bttn4.setBackground(Color.RED);
-            bttn7.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
-            bttn2.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn8.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn3.getTempValue() == 1 && bttn6.getTempValue() == 1 && bttn9.getTempValue() == 1) {
-            bttn3.setBackground(Color.RED);
-            bttn6.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn1.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn9.getTempValue() == 1) {
-            bttn1.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        } else if (bttn3.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn7.getTempValue() == 1) {
-            bttn3.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn7.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
-        }
-    }
-
-    public void AmILost() {
-        if (bttn1.getTempValue() == 2 && bttn2.getTempValue() == 2 && bttn3.getTempValue() == 2) {
-            bttn1.setBackground(Color.RED);
-            bttn2.setBackground(Color.RED);
-            bttn3.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn4.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn6.getTempValue() == 2) {
-            bttn4.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn6.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn7.getTempValue() == 2 && bttn8.getTempValue() == 2 && bttn9.getTempValue() == 2) {
-            bttn7.setBackground(Color.RED);
-            bttn8.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn1.getTempValue() == 2 && bttn4.getTempValue() == 2 && bttn7.getTempValue() == 2) {
-            bttn1.setBackground(Color.RED);
-            bttn4.setBackground(Color.RED);
-            bttn7.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn2.getTempValue() == 1 && bttn5.getTempValue() == 1 && bttn8.getTempValue() == 1) {
-            bttn2.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn8.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn3.getTempValue() == 2 && bttn6.getTempValue() == 2 && bttn9.getTempValue() == 2) {
-            bttn3.setBackground(Color.RED);
-            bttn6.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn1.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn9.getTempValue() == 2) {
-            bttn1.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn9.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        } else if (bttn3.getTempValue() == 2 && bttn5.getTempValue() == 2 && bttn7.getTempValue() == 2) {
-            bttn3.setBackground(Color.RED);
-            bttn5.setBackground(Color.RED);
-            bttn7.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
-        }
-    }
-
     public void action() {
-        AmIWin();
+        comparator(allLines);
         int bound = secondButtonList.size();
+        if (bound == 0) {
+        }
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
         secondButtonList.get(randomNumber).setText("0");
         secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
-        AmILost();
+        comparator(allLines);
+        System.out.println("Your turn");
     }
 
     @Override
@@ -219,49 +230,77 @@ public class MainFrame extends JFrame implements ActionListener {
                 elem.setBackground(Color.WHITE);
             }
         } else if (source == bttn1) {
+            bttn1.setText("X");
             bttn1.tempValue = 1;
             secondButtonList.remove(bttn1);
             action();
 
         } else if (source == bttn2) {
+            bttn2.setText("X");
             bttn2.tempValue = 1;
             secondButtonList.remove(bttn2);
             action();
 
         } else if (source == bttn3) {
+            bttn3.setText("X");
             bttn3.tempValue = 1;
             secondButtonList.remove(bttn3);
             action();
 
         } else if (source == bttn4) {
+            System.out.println("yourn turn");
+            bttn4.setText("X");
             bttn4.tempValue = 1;
             secondButtonList.remove(bttn4);
             action();
 
         } else if (source == bttn5) {
+            bttn5.setText("X");
             bttn5.tempValue = 1;
             secondButtonList.remove(bttn5);
             action();
 
         } else if (source == bttn6) {
+            bttn6.setText("X");
             bttn6.tempValue = 1;
             secondButtonList.remove(bttn6);
             action();
 
         } else if (source == bttn7) {
+            bttn7.setText("X");
             bttn7.tempValue = 1;
             secondButtonList.remove(bttn7);
             action();
 
         } else if (source == bttn8) {
+            bttn8.setText("X");
             bttn8.tempValue = 1;
             secondButtonList.remove(bttn8);
             action();
 
         } else if (source == bttn9) {
+            bttn9.setText("X");
             bttn9.tempValue = 1;
             secondButtonList.remove(bttn9);
             action();
         }
+    }
+
+
+    public int comparator(ArrayList<ArrayList<Button>> allLines) {
+        for (ArrayList<Button> line : allLines)
+        if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
+            for (Button elements : line)
+                elements.setBackground(Color.RED);
+            whatToDoAfterCheckAmIWin();
+            return 1;
+            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
+            for (Button elements : line)
+                elements.setBackground(Color.RED);
+            whatToDoAfterCheckAmILost();
+            return 2;
+            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() != 2) {
+
+        } return 3;
     }
 }
