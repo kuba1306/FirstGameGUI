@@ -201,9 +201,11 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void action() {
-        comparator(allLines);
+        if (comparator(allLines)==1) {
+            whatToDoAfterCheckAmIWin();
+        }
         int bound = secondButtonList.size();
-        if (bound == 0) {
+        if (bound == 0) { return;
         }
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
@@ -211,7 +213,9 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
-        comparator(allLines);
+        if (comparator(allLines)==2) {
+            whatToDoAfterCheckAmILost();
+        }
         System.out.println("Your turn");
     }
 
@@ -229,78 +233,29 @@ public class MainFrame extends JFrame implements ActionListener {
                 elem.tempValue = 0;
                 elem.setBackground(Color.WHITE);
             }
-        } else if (source == bttn1) {
-            bttn1.setText("X");
-            bttn1.tempValue = 1;
-            secondButtonList.remove(bttn1);
-            action();
-
-        } else if (source == bttn2) {
-            bttn2.setText("X");
-            bttn2.tempValue = 1;
-            secondButtonList.remove(bttn2);
-            action();
-
-        } else if (source == bttn3) {
-            bttn3.setText("X");
-            bttn3.tempValue = 1;
-            secondButtonList.remove(bttn3);
-            action();
-
-        } else if (source == bttn4) {
-            System.out.println("yourn turn");
-            bttn4.setText("X");
-            bttn4.tempValue = 1;
-            secondButtonList.remove(bttn4);
-            action();
-
-        } else if (source == bttn5) {
-            bttn5.setText("X");
-            bttn5.tempValue = 1;
-            secondButtonList.remove(bttn5);
-            action();
-
-        } else if (source == bttn6) {
-            bttn6.setText("X");
-            bttn6.tempValue = 1;
-            secondButtonList.remove(bttn6);
-            action();
-
-        } else if (source == bttn7) {
-            bttn7.setText("X");
-            bttn7.tempValue = 1;
-            secondButtonList.remove(bttn7);
-            action();
-
-        } else if (source == bttn8) {
-            bttn8.setText("X");
-            bttn8.tempValue = 1;
-            secondButtonList.remove(bttn8);
-            action();
-
-        } else if (source == bttn9) {
-            bttn9.setText("X");
-            bttn9.tempValue = 1;
-            secondButtonList.remove(bttn9);
-            action();
+        } else {
+            for (Button elem : buttonList)
+                if (source == elem) {
+                    System.out.println("yourn turn");
+                    elem.setText("X");
+                    elem.tempValue = 1;
+                    secondButtonList.remove(elem);
+                    action();
+                }
         }
     }
-
 
     public int comparator(ArrayList<ArrayList<Button>> allLines) {
         for (ArrayList<Button> line : allLines)
         if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
             for (Button elements : line)
                 elements.setBackground(Color.RED);
-            whatToDoAfterCheckAmIWin();
             return 1;
             } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
             for (Button elements : line)
                 elements.setBackground(Color.RED);
-            whatToDoAfterCheckAmILost();
             return 2;
             } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() != 2) {
-
         } return 3;
     }
 }
