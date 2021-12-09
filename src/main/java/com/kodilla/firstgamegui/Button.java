@@ -25,20 +25,8 @@ public class Button extends JButton implements ActionListener {
         this.tempValue = 0;
         buttonList.add(this);
     }
-
     public int getTempValue() {
         return tempValue;
-    }
-
-
-    public int compare(Button b1, Button b2, Button b3) {
-        if (b1.getTempValue() == 1 && b1.getTempValue() == b2.getTempValue() && b2.getTempValue() == b3.getTempValue())
-            return 1;
-        if (b1.getTempValue() == 2 && b1.getTempValue() == b2.getTempValue() && b2.getTempValue() == b3.getTempValue())
-            return 2;
-        else {
-            return 3;
-        }
     }
 
     @Override

@@ -108,6 +108,8 @@ public class MainFrame extends JFrame implements ActionListener {
         info.setFont(new Font("tralala", Font.BOLD, 20));
         level1.setBounds(870, 500, 100, 25);
         level1.setVisible(true);
+        level1.addActionListener(this);
+        level2.addActionListener(this);
         level2.setBounds(970, 500, 100, 25);
         level2.setVisible(true);
         choseLevel.add(level1);
@@ -148,7 +150,6 @@ public class MainFrame extends JFrame implements ActionListener {
         add(info);
     }
 
-
     public MainFrame() {
         setTitle("Tic Tac Toe by Jakub Panienski");
         setSize(1300, 700);
@@ -186,7 +187,7 @@ public class MainFrame extends JFrame implements ActionListener {
         for (Button elem : buttonList) {
             elem.setEnabled(false);
         }
-        System.out.println("You Win");
+        System.out.println("You Won");
     }
 
     public void whatToDoAfterCheckAmILost() {
@@ -200,7 +201,7 @@ public class MainFrame extends JFrame implements ActionListener {
         System.out.println("You Lost");
     }
 
-    public void action() {
+    public void actionEasyLevel() {
         if (comparator(allLines)==1) {
             whatToDoAfterCheckAmIWin();
         }
@@ -216,7 +217,21 @@ public class MainFrame extends JFrame implements ActionListener {
         if (comparator(allLines)==2) {
             whatToDoAfterCheckAmILost();
         }
-        System.out.println("Your turn");
+    }
+
+    public void actionHardLevel(ArrayList<Button> line) {
+        if (comparator(allLines) == 3) {
+            for (Button button : line)
+                if (button.getTempValue()==0) {
+                    ArrayList<Button> solution = new ArrayList<Button>();
+                    solution.add(button);
+                    solution.get(0);
+                    solution.get(0).setText("0");
+                    solution.get(0).tempValue = 2;
+                    solution.get(0).setEnabled(false);
+                    solution.remove(0);
+                }
+        }
     }
 
     @Override
@@ -227,20 +242,21 @@ public class MainFrame extends JFrame implements ActionListener {
             secondButtonList.clear();
             secondButtonList.addAll(buttonList);
 
+
             for (Button elem : buttonList) {
                 elem.setText("");
                 elem.setEnabled(true);
                 elem.tempValue = 0;
                 elem.setBackground(Color.WHITE);
             }
+
         } else {
             for (Button elem : buttonList)
                 if (source == elem) {
-                    System.out.println("yourn turn");
                     elem.setText("X");
                     elem.tempValue = 1;
                     secondButtonList.remove(elem);
-                    action();
+                    actionEasyLevel();
                 }
         }
     }
@@ -255,7 +271,12 @@ public class MainFrame extends JFrame implements ActionListener {
             for (Button elements : line)
                 elements.setBackground(Color.RED);
             return 2;
-            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() != 2) {
-        } return 3;
+            } else if ((line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() != 2)
+                || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() != 2 && line.get(2).getTempValue() == 2)
+                || (line.get(0).getTempValue() != 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2)) {
+            } return 3;
+    }
+    public void difficultLevel() {
+
     }
 }
