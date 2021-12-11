@@ -6,27 +6,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class MainFrame extends JFrame implements ActionListener {
 
     final private int a = 150, b = 310, c = 470; // Squares positions
-    private int yourScore, compScore, randomNumber;
+    private int yourScore, compScore, randomNumber, temporaryValue, compMove;
     private Random random;
     private StartButton startBttn;
     private Button bttn1, bttn2, bttn3, bttn4, bttn5, bttn6, bttn7, bttn8, bttn9;
-    private ArrayList<Button> buttonList;
+    private LinkedList<Button> buttonList;
     private LinkedList<Button> secondButtonList;
-    private ArrayList<Button> line1, line2, line3, line4, line5, line6, line7, line8;
-    private ArrayList<ArrayList<Button>> allLines;
     private Score label1, label2;
     private JLabel label3, info;
     private JRadioButton level1, level2;
     private ButtonGroup choseLevel;
+    //    private Line line1, line2, line3, line4, line5, line6, line7, line8;
+//    private LinkedList<Line> allLines;
+    private LinkedList<LinkedList<Button>> allLines;
+    private LinkedList<Button> line1, line2, line3, line4, line5, line6, line7, line8;
+
 
     public void createAllNeseseryObjects() {
         secondButtonList = new LinkedList<>();
-        buttonList = new ArrayList<>();
+        buttonList = new LinkedList<>();
         label1 = new Score();
         label2 = new Score();
         label3 = new JLabel();
@@ -46,16 +50,25 @@ public class MainFrame extends JFrame implements ActionListener {
         bttn7 = new Button("3x1", a, c);
         bttn8 = new Button("3x2", b, c);
         bttn9 = new Button("3x3", c, c);
+        allLines = new LinkedList<LinkedList<Button>>();
 
-        line1 = new ArrayList<Button>();
-        line2 = new ArrayList<Button>();
-        line3 = new ArrayList<Button>();
-        line4 = new ArrayList<Button>();
-        line5 = new ArrayList<Button>();
-        line6 = new ArrayList<Button>();
-        line7 = new ArrayList<Button>();
-        line8 = new ArrayList<Button>();
-        allLines = new ArrayList<ArrayList<Button>>();
+//        line1 = new Line("line123", bttn1, bttn2, bttn3);
+//        line2 = new Line("line456", bttn4, bttn5, bttn6);
+//        line3 = new Line("line789", bttn7, bttn8, bttn9);
+//        line4 = new Line("line147", bttn1, bttn4, bttn7);
+//        line5 = new Line("line258", bttn2, bttn5, bttn8);
+//        line6 = new Line("line369", bttn3, bttn6, bttn9);
+//        line7 = new Line("line159", bttn1, bttn5, bttn9);
+//        line8 = new Line("line357", bttn3, bttn5, bttn7);
+
+        line1 = new LinkedList<Button>();
+        line2 = new LinkedList<Button>();
+        line3 = new LinkedList<Button>();
+        line4 = new LinkedList<Button>();
+        line5 = new LinkedList<Button>();
+        line6 = new LinkedList<Button>();
+        line7 = new LinkedList<Button>();
+        line8 = new LinkedList<Button>();
 
         line1.add(bttn1);
         line1.add(bttn2);
@@ -161,7 +174,7 @@ public class MainFrame extends JFrame implements ActionListener {
         customizeAllObjects();
 
         secondButtonList = new LinkedList<>();
-        buttonList = new ArrayList<>();
+        buttonList = new LinkedList<>();
         label1 = new Score();
         label2 = new Score();
         info = new JLabel();
@@ -201,12 +214,14 @@ public class MainFrame extends JFrame implements ActionListener {
         System.out.println("You Lost");
     }
 
+
     public void actionEasyLevel() {
-        if (comparator(allLines)==1) {
+        if (comparator(allLines) == 1) {
             whatToDoAfterCheckAmIWin();
         }
         int bound = secondButtonList.size();
-        if (bound == 0) { return;
+        if (bound == 0) {
+            return;
         }
         randomNumber = random.nextInt(bound);
         secondButtonList.get(randomNumber);
@@ -214,25 +229,43 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.get(randomNumber).tempValue = 2;
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
-        if (comparator(allLines)==2) {
+
+        if (comparator(allLines) == 2) {
             whatToDoAfterCheckAmILost();
         }
     }
 
-    public void actionHardLevel(ArrayList<Button> line) {
-        if (comparator(allLines) == 3) {
-            for (Button button : line)
-                if (button.getTempValue()==0) {
-                    ArrayList<Button> solution = new ArrayList<Button>();
-                    solution.add(button);
-                    solution.get(0);
-                    solution.get(0).setText("0");
-                    solution.get(0).tempValue = 2;
-                    solution.get(0).setEnabled(false);
-                    solution.remove(0);
+    public void actionDifficultLevel() {
+        if (bttn5.isEnabled() == true) {
+            bttn5.setText("0");
+            bttn5.setEnabled(false);
+            bttn5.setTempValue(0);
+            secondButtonList.remove(bttn5);
+        } else {
+            for (LinkedList<Button> line : allLines)
+                if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 0) {
+                    line.get(2).setTempValue(2);
+                    line.get(2).setText("2");
+                    line.get(2).setEnabled(false);
+                    secondButtonList.remove(line.get(2));
+                } else if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 0 && line.get(2).getTempValue() == 1) {
+                    line.get(1).setTempValue(2);
+                    line.get(1).setText("2");
+                    line.get(1).setEnabled(false);
+                    secondButtonList.remove(line.get(1));
+
+                } else if (line.get(0).getTempValue() == 0 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
+                    line.get(0).setTempValue(2);
+                    line.get(0).setText("2");
+                    line.get(0).setEnabled(false);
+                    secondButtonList.remove(line.get(0));
+                } else {
+                    actionEasyLevel();
                 }
+
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -241,42 +274,66 @@ public class MainFrame extends JFrame implements ActionListener {
         if (source == startBttn) {
             secondButtonList.clear();
             secondButtonList.addAll(buttonList);
-
-
             for (Button elem : buttonList) {
                 elem.setText("");
                 elem.setEnabled(true);
                 elem.tempValue = 0;
                 elem.setBackground(Color.WHITE);
             }
-
         } else {
             for (Button elem : buttonList)
                 if (source == elem) {
                     elem.setText("X");
                     elem.tempValue = 1;
                     secondButtonList.remove(elem);
-                    actionEasyLevel();
+
+                    if (level1.isSelected()) {
+                        actionEasyLevel();
+                    } else if (level2.isSelected()) {
+                        actionDifficultLevel();
+                    }
                 }
         }
     }
 
-    public int comparator(ArrayList<ArrayList<Button>> allLines) {
-        for (ArrayList<Button> line : allLines)
-        if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
-            for (Button elements : line)
-                elements.setBackground(Color.RED);
-            return 1;
-            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
-            for (Button elements : line)
-                elements.setBackground(Color.RED);
-            return 2;
-            } else if ((line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() != 2)
-                || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() != 2 && line.get(2).getTempValue() == 2)
-                || (line.get(0).getTempValue() != 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2)) {
-            } return 3;
-    }
-    public void difficultLevel() {
 
+    public int comparator(LinkedList<LinkedList<Button>> allLines) {
+        for (LinkedList<Button> line : allLines)
+            if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
+                for (Button elements : line)
+                    elements.setBackground(Color.RED);
+                return 1;
+            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
+                for (Button elements : line)
+                    elements.setBackground(Color.RED);
+                return 2;
+            } else if ((line.get(0).getTempValue() == 0 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2)
+                    || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 0 && line.get(2).getTempValue() == 2)
+                    || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 0)) {
+            }
+        return 3;
+    }
+
+    public int lineChecker1(LinkedList<Button> Lines) {
+        for (LinkedList<Button> line : allLines)
+            if (line.get(0).getTempValue() == 0) {
+                return 1;
+            } else if (line.get(1).getTempValue() == 0) {
+                return 2;
+            } else if (line.get(2).getTempValue() == 0) {
+                return 3;
+            } else {
+            }
+        return 0;
     }
 }
+
+
+//        if (line.getFirstButton().getTempValue() == 0 && line.getSecondButton().getTempValue() == 2 && line.getThirdButton().getTempValue() == 2) {
+//            return 0;
+//        } else if (line.getFirstButton().getTempValue() == 2 && line.getSecondButton().getTempValue() == 0 && line.getThirdButton().getTempValue() == 2) {
+//            return 1;
+//        } else if (line.getFirstButton().getTempValue() == 2 && line.getSecondButton().getTempValue() == 2 && line.getThirdButton().getTempValue() == 0) {
+//        }
+//        return 2;
+//        }

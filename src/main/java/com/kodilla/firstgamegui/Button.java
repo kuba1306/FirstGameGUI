@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Button extends JButton implements ActionListener {
 
@@ -12,7 +13,7 @@ public class Button extends JButton implements ActionListener {
     private int xPosition;
     private int yPosition;
     int tempValue;
-    private ArrayList<Button> buttonList = new ArrayList<>();
+    private LinkedList<Button> buttonList = new LinkedList<>();
 
     public Button(String name, int xPosition, int yPosition) {
         setBackground(Color.WHITE);
@@ -25,6 +26,45 @@ public class Button extends JButton implements ActionListener {
         this.tempValue = 0;
         buttonList.add(this);
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public void setxPosition(int xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
+    }
+
+    public void setyPosition(int yPosition) {
+        this.yPosition = yPosition;
+    }
+
+    public void setTempValue(int tempValue) {
+        this.tempValue = tempValue;
+    }
+
+    public LinkedList<Button> getButtonList() {
+        return buttonList;
+    }
+
+    public void setButtonList(LinkedList<Button> buttonList) {
+        this.buttonList = buttonList;
+    }
+
     public int getTempValue() {
         return tempValue;
     }
