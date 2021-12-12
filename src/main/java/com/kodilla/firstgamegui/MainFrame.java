@@ -192,12 +192,13 @@ public class MainFrame extends JFrame implements ActionListener {
         addAllneseseryObjects();
     }
 
+
     public void whatToDoAfterCheckAmIWin() {
         info.setText("CONGRATULATIONS");
         info.setVisible(true);
         yourScore++;
         label1.setText("Your Score: " + yourScore);
-        for (Button elem : buttonList) {
+        for (Button elem : secondButtonList) {
             elem.setEnabled(false);
         }
         System.out.println("You Won");
@@ -208,7 +209,7 @@ public class MainFrame extends JFrame implements ActionListener {
         info.setVisible(true);
         compScore++;
         label2.setText("Comp Score: " + compScore);
-        for (Button elem : buttonList) {
+        for (Button elem : secondButtonList) {
             elem.setEnabled(false);
         }
         System.out.println("You Lost");
@@ -216,7 +217,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
     public void actionEasyLevel() {
-        if (comparator(allLines) == 1) {
+        if (comparator(allLines) == 3) {
             whatToDoAfterCheckAmIWin();
         }
         int bound = secondButtonList.size();
@@ -230,41 +231,34 @@ public class MainFrame extends JFrame implements ActionListener {
         secondButtonList.get(randomNumber).setEnabled(false);
         secondButtonList.remove(randomNumber);
 
-        if (comparator(allLines) == 2) {
+        if (comparator(allLines) == 4) {
             whatToDoAfterCheckAmILost();
         }
+        if (bound == 0) {
+            return;
+        }
+
     }
 
     public void actionDifficultLevel() {
-        if (bttn5.isEnabled() == true) {
-            bttn5.setText("0");
-            bttn5.setEnabled(false);
-            bttn5.setTempValue(0);
-            secondButtonList.remove(bttn5);
-        } else {
-            for (LinkedList<Button> line : allLines)
-                if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 0) {
-                    line.get(2).setTempValue(2);
-                    line.get(2).setText("2");
-                    line.get(2).setEnabled(false);
-                    secondButtonList.remove(line.get(2));
-                } else if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 0 && line.get(2).getTempValue() == 1) {
-                    line.get(1).setTempValue(2);
-                    line.get(1).setText("2");
-                    line.get(1).setEnabled(false);
-                    secondButtonList.remove(line.get(1));
 
-                } else if (line.get(0).getTempValue() == 0 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
-                    line.get(0).setTempValue(2);
-                    line.get(0).setText("2");
-                    line.get(0).setEnabled(false);
-                    secondButtonList.remove(line.get(0));
-                } else {
-                    actionEasyLevel();
-                }
+        if (comparator(allLines) == 1) {
+            whatToDoAfterCheckAmIWin();
+        }
+        int bound = secondButtonList.size();
+        if (bound == 0) {
+            return;
+        }
 
+
+        if (comparator(allLines) == 2) {
+            whatToDoAfterCheckAmILost();
+        }
+        if (bound == 0) {
+            return;
         }
     }
+
 
 
     @Override
@@ -286,12 +280,10 @@ public class MainFrame extends JFrame implements ActionListener {
                     elem.setText("X");
                     elem.tempValue = 1;
                     secondButtonList.remove(elem);
-
-                    if (level1.isSelected()) {
+                    if (level1.isSelected())
                         actionEasyLevel();
-                    } else if (level2.isSelected()) {
+                    if (level2.isSelected())
                         actionDifficultLevel();
-                    }
                 }
         }
     }
@@ -302,29 +294,46 @@ public class MainFrame extends JFrame implements ActionListener {
             if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
                 for (Button elements : line)
                     elements.setBackground(Color.RED);
-                return 1;
+                return 3;
             } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
                 for (Button elements : line)
                     elements.setBackground(Color.RED);
+                return 4;
+            } else if (line.get(0).getTempValue() == 0 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2) {
+                line.get(0).setTempValue(1);
+                secondButtonList.remove(line.get(0));
+                line.get(0).setEnabled(false);
+                line.get(0).setText("0");
+                return 0;
+
+            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 0 && line.get(2).getTempValue() == 2) {
+                line.get(1).setTempValue(1);
+                secondButtonList.remove(line.get(1));
+                line.get(1).setEnabled(false);
+                line.get(1).setText("0");
+                return 1;
+
+            } else if (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 0) {
+                line.get(0).setTempValue(1);
+                secondButtonList.remove(line.get(0));
+                line.get(0).setEnabled(false);
+                line.get(0).setText("0");
                 return 2;
-            } else if ((line.get(0).getTempValue() == 0 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 2)
-                    || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 0 && line.get(2).getTempValue() == 2)
-                    || (line.get(0).getTempValue() == 2 && line.get(1).getTempValue() == 2 && line.get(2).getTempValue() == 0)) {
             }
-        return 3;
+        return 7;
     }
 
-    public int lineChecker1(LinkedList<Button> Lines) {
-        for (LinkedList<Button> line : allLines)
-            if (line.get(0).getTempValue() == 0) {
-                return 1;
-            } else if (line.get(1).getTempValue() == 0) {
-                return 2;
-            } else if (line.get(2).getTempValue() == 0) {
-                return 3;
-            } else {
+    public Button lineChecker1(LinkedList<LinkedList<Button>> allLines) {
+        for (int i = 0; i < allLines.size(); i++)
+
+            if (allLines.get(i).get(0).getTempValue() == 0) {
+                return allLines.get(i).get(0);
+            } else if (allLines.get(i).get(1).getTempValue() == 0) {
+                return allLines.get(i).get(1);
+            } else if (allLines.get(i).get(2).getTempValue() == 0) {
+                return allLines.get(i).get(2);
             }
-        return 0;
+        return bttn5;
     }
 }
 
