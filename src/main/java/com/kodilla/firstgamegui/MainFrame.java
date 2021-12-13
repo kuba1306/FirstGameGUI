@@ -4,16 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    final private int a = 150, b = 310, c = 470; // Squares positions
-    private int yourScore, compScore, randomNumber, temporaryValue, compMove;
+    final private int bound1 = 150, bound2 = 310, bound3 = 470;
+    private int yourScore, compScore, randomNumber;
     private Random random;
     private StartButton startBttn;
     private Button bttn1, bttn2, bttn3, bttn4, bttn5, bttn6, bttn7, bttn8, bttn9;
@@ -23,13 +20,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private JLabel label3, info;
     private JRadioButton level1, level2;
     private ButtonGroup choseLevel;
-    //    private Line line1, line2, line3, line4, line5, line6, line7, line8;
-//    private LinkedList<Line> allLines;
     private LinkedList<LinkedList<Button>> allLines;
     private LinkedList<Button> line1, line2, line3, line4, line5, line6, line7, line8;
-    LinkedList<Button> tempList5 = new LinkedList<Button>();
-
-
 
     public void createAllNeseseryObjects() {
         secondButtonList = new LinkedList<>();
@@ -44,25 +36,16 @@ public class MainFrame extends JFrame implements ActionListener {
         level2 = new JRadioButton("level 2", false);
         choseLevel = new ButtonGroup();
 
-        bttn1 = new Button("1x1", a, a);
-        bttn2 = new Button("1x2", b, a);
-        bttn3 = new Button("1x3", c, a);
-        bttn4 = new Button("2x1", a, b);
-        bttn5 = new Button("2x2", b, b);
-        bttn6 = new Button("2x3", c, b);
-        bttn7 = new Button("3x1", a, c);
-        bttn8 = new Button("3x2", b, c);
-        bttn9 = new Button("3x3", c, c);
+        bttn1 = new Button("1x1", bound1, bound1);
+        bttn2 = new Button("1x2", bound2, bound1);
+        bttn3 = new Button("1x3", bound3, bound1);
+        bttn4 = new Button("2x1", bound1, bound2);
+        bttn5 = new Button("2x2", bound2, bound2);
+        bttn6 = new Button("2x3", bound3, bound2);
+        bttn7 = new Button("3x1", bound1, bound3);
+        bttn8 = new Button("3x2", bound2, bound3);
+        bttn9 = new Button("3x3", bound3, bound3);
         allLines = new LinkedList<LinkedList<Button>>();
-
-//        line1 = new Line("line123", bttn1, bttn2, bttn3);
-//        line2 = new Line("line456", bttn4, bttn5, bttn6);
-//        line3 = new Line("line789", bttn7, bttn8, bttn9);
-//        line4 = new Line("line147", bttn1, bttn4, bttn7);
-//        line5 = new Line("line258", bttn2, bttn5, bttn8);
-//        line6 = new Line("line369", bttn3, bttn6, bttn9);
-//        line7 = new Line("line159", bttn1, bttn5, bttn9);
-//        line8 = new Line("line357", bttn3, bttn5, bttn7);
 
         line1 = new LinkedList<Button>();
         line2 = new LinkedList<Button>();
@@ -204,8 +187,8 @@ public class MainFrame extends JFrame implements ActionListener {
         for (Button elem : secondButtonList) {
             elem.setEnabled(false);
         }
-
         System.out.println("You Won");
+        return;
     }
 
     public void whatToDoAfterCheckAmILost() {
@@ -217,14 +200,15 @@ public class MainFrame extends JFrame implements ActionListener {
             elem.setEnabled(false);
         }
         System.out.println("You Lost");
+        return;
     }
+
     public void actionForButton(int number) {
         secondButtonList.get(number);
         secondButtonList.get(number).setText("0");
         secondButtonList.get(number).tempValue = 2;
         secondButtonList.get(number).setEnabled(false);
         secondButtonList.remove(number);
-
     }
 
     public void compActionEasyLevel() {
@@ -239,15 +223,12 @@ public class MainFrame extends JFrame implements ActionListener {
             }
             randomNumber = random.nextInt(bound);
             actionForButton(randomNumber);
-
         }
 
         if (comparator(allLines) == 2) {
             whatToDoAfterCheckAmILost();
         }
-
     }
-
 
     public void compActionDifficultLevel() {
 
@@ -272,24 +253,31 @@ public class MainFrame extends JFrame implements ActionListener {
                     allLines.get(i).get(2).setEnabled(false);
                     allLines.get(i).get(2).setTempValue(2);
                     secondButtonList.remove(allLines.get(i).get(2));
+                    if (comparator(allLines) == 2) {
+                        whatToDoAfterCheckAmILost();
+                    }
                     return;
                 } else if (allLines.get(i).get(0).getTempValue()==allLines.get(i).get(2).getTempValue() && allLines.get(i).get(1).isEnabled()) {
                     allLines.get(i).get(1).setText("0");
                     allLines.get(i).get(1).setEnabled(false);
                     allLines.get(i).get(1).setTempValue(2);
                     secondButtonList.remove(allLines.get(i).get(1));
+                    if (comparator(allLines) == 2) {
+                        whatToDoAfterCheckAmILost();
+                    }
                     return;
                 } else if (allLines.get(i).get(1).getTempValue()==allLines.get(i).get(2).getTempValue() && allLines.get(i).get(0).isEnabled()) {
                     allLines.get(i).get(0).setText("0");
                     allLines.get(i).get(0).setEnabled(false);
                     allLines.get(i).get(0).setTempValue(2);
                     secondButtonList.remove(allLines.get(i).get(0));
+                    if (comparator(allLines) == 2) {
+                        whatToDoAfterCheckAmILost();
+                    }
                     return;
                 }
         }
     }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
     Object source = e.getSource();
@@ -319,7 +307,6 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
-
     public int comparator(LinkedList<LinkedList<Button>> allLines) {
         for (LinkedList<Button> line : allLines)
             if (line.get(0).getTempValue() == 1 && line.get(1).getTempValue() == 1 && line.get(2).getTempValue() == 1) {
@@ -340,13 +327,3 @@ public class MainFrame extends JFrame implements ActionListener {
         return 6;
     }
 }
-
-
-//        if (line.getFirstButton().getTempValue() == 0 && line.getSecondButton().getTempValue() == 2 && line.getThirdButton().getTempValue() == 2) {
-//            return 0;
-//        } else if (line.getFirstButton().getTempValue() == 2 && line.getSecondButton().getTempValue() == 0 && line.getThirdButton().getTempValue() == 2) {
-//            return 1;
-//        } else if (line.getFirstButton().getTempValue() == 2 && line.getSecondButton().getTempValue() == 2 && line.getThirdButton().getTempValue() == 0) {
-//        }
-//        return 2;
-//        }
