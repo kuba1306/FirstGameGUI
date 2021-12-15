@@ -236,10 +236,7 @@ public class MainFrame extends JFrame implements ActionListener {
             whatToDoAfterCheckAmIWin();
             return;
         }
-        int bound = secondButtonList.size();
-        if (bound == 0) {
-            return;
-        }
+
         if (bttn5.isEnabled() == true) {
             bttn5.setEnabled(false);
             bttn5.setText("0");
@@ -247,63 +244,78 @@ public class MainFrame extends JFrame implements ActionListener {
             secondButtonList.remove(bttn5);
 
         } else {
-            for (int i=0; i<allLines.size(); i++)
-                if (allLines.get(i).get(0).getTempValue()==allLines.get(i).get(1).getTempValue() && allLines.get(i).get(2).isEnabled()) {
-                    allLines.get(i).get(2).setText("0");
-                    allLines.get(i).get(2).setEnabled(false);
-                    allLines.get(i).get(2).setTempValue(2);
-                    secondButtonList.remove(allLines.get(i).get(2));
+            for (LinkedList<Button> line : allLines) {
+                if (line.get(0).getTempValue() == line.get(1).getTempValue() && line.get(2).isEnabled() && line.get(0).getTempValue() != 0) {
+                    line.get(2).setText("0");
+                    line.get(2).setEnabled(false);
+                    line.get(2).setTempValue(2);
+                    secondButtonList.remove(line.get(2));
+
                     if (comparator(allLines) == 2) {
                         whatToDoAfterCheckAmILost();
                     }
                     return;
-                } else if (allLines.get(i).get(0).getTempValue()==allLines.get(i).get(2).getTempValue() && allLines.get(i).get(1).isEnabled()) {
-                    allLines.get(i).get(1).setText("0");
-                    allLines.get(i).get(1).setEnabled(false);
-                    allLines.get(i).get(1).setTempValue(2);
-                    secondButtonList.remove(allLines.get(i).get(1));
+                } else if (line.get(0).getTempValue() == line.get(2).getTempValue() && line.get(1).isEnabled() && line.get(0).getTempValue() != 0) {
+                    line.get(1).setText("0");
+                    line.get(1).setEnabled(false);
+                    line.get(1).setTempValue(2);
+                    secondButtonList.remove(line.get(1));
                     if (comparator(allLines) == 2) {
                         whatToDoAfterCheckAmILost();
                     }
                     return;
-                } else if (allLines.get(i).get(1).getTempValue()==allLines.get(i).get(2).getTempValue() && allLines.get(i).get(0).isEnabled()) {
-                    allLines.get(i).get(0).setText("0");
-                    allLines.get(i).get(0).setEnabled(false);
-                    allLines.get(i).get(0).setTempValue(2);
-                    secondButtonList.remove(allLines.get(i).get(0));
+
+                } else if (line.get(1).getTempValue() == line.get(2).getTempValue() && line.get(0).isEnabled() && line.get(1).getTempValue() != 0) {
+                    line.get(0).setText("0");
+                    line.get(0).setEnabled(false);
+                    line.get(0).setTempValue(2);
+                    secondButtonList.remove(line.get(0));
                     if (comparator(allLines) == 2) {
                         whatToDoAfterCheckAmILost();
                     }
+                    return;
+
+                }
+            }
+            if (comparator(allLines) == 6) {
+                int bound = secondButtonList.size();
+                if (bound == 0) {
                     return;
                 }
+                randomNumber = random.nextInt(bound);
+                actionForButton(randomNumber);
+                return;
+            }
         }
     }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-    Object source = e.getSource();
+        Object source = e.getSource();
 
-    if (source == startBttn) {
-        secondButtonList.clear();
-        secondButtonList.addAll(buttonList);
-        for (Button elem : buttonList) {
-            elem.setText("");
-            elem.setEnabled(true);
-            elem.tempValue = 0;
-            elem.setBackground(Color.WHITE);
-        }
-    } else {
-        for (Button elem : buttonList)
-            if (source == elem) {
-                elem.setText("X");
-                elem.tempValue = 1;
-                elem.setEnabled(false);
-                secondButtonList.remove(elem);
-
-                if (level1.isSelected())
-                    compActionEasyLevel();
-                if (level2.isSelected())
-                    compActionDifficultLevel();
+        if (source == startBttn) {
+            secondButtonList.clear();
+            secondButtonList.addAll(buttonList);
+            for (Button elem : buttonList) {
+                elem.setText("");
+                elem.setEnabled(true);
+                elem.tempValue = 0;
+                elem.setBackground(Color.WHITE);
             }
+        } else {
+            for (Button elem : buttonList)
+                if (source == elem) {
+                    elem.setText("X");
+                    elem.tempValue = 1;
+                    elem.setEnabled(false);
+                    secondButtonList.remove(elem);
+
+                    if (level1.isSelected())
+                        compActionEasyLevel();
+                    if (level2.isSelected())
+                        compActionDifficultLevel();
+                }
         }
     }
 
