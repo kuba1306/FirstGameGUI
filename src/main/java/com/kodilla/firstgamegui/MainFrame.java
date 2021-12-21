@@ -41,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener {
     List<Button> buttonList = Arrays.asList(buttonListea);
 
     public void customizeAllObjects() {
-        label3.setText("POWODZENIA");
+        label3.setText("POWODZENIA...");
         label3.setFont(new Font("tralala", Font.BOLD, 40));
         label3.setBounds(250, 30, 300, 130);
         info.setBounds(900, 400, 300, 140);
