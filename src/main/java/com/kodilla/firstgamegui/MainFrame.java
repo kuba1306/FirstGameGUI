@@ -108,7 +108,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void whatToDoAfterCheckAmILost() {
-        info.setText("UNFORTUNETLY...");
+        info.setText("UNFORTUNETLY..");
         info.setVisible(true);
         compScore++;
         label2.setText("Comp Score: " + compScore);
